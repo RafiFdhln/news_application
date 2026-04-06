@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # News Application — Flutter News App
 
 A fully-featured Flutter news application built with Firebase Auth, NewsAPI, GetX state management, and SQLite local storage.
@@ -173,3 +174,7 @@ NewsAPI free-tier keys may take **several minutes to a few hours** to become act
 | `canLaunchUrl` returns false | Ensure `AndroidManifest.xml` has `<queries>` for `https` scheme |
 | Emulator camera not working | Use a physical device or configure emulator camera settings |
 | Firebase initialization error | Verify `google-services.json` package name matches `com.example.news_apps` |
+=======
+# news_application
+News Application is a mobile-based news app that allows users to browse the latest headlines and read full article details in a seamless interface.
+>>>>>>> origin/main
