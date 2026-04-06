@@ -26,7 +26,7 @@ A fully-featured Flutter news application built with Firebase Auth, NewsAPI, Get
 
 ### 1. Clone and install dependencies
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/RafiFdhln/news_application.git
 cd news_apps
 flutter pub get
 ```
