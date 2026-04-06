@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # News Application — Flutter News App
 
 A fully-featured Flutter news application built with Firebase Auth, NewsAPI, GetX state management, and SQLite local storage.
