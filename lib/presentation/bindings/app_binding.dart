@@ -13,7 +13,6 @@ import '../controllers/news_controller.dart';
 import '../controllers/chat_controller.dart';
 import '../controllers/bookmark_controller.dart';
 
-/// Root binding — registers all dependencies at app start
 class AppBinding extends Bindings {
   @override
   void dependencies() {

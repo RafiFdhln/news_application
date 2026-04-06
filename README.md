@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # News Application — Flutter News App
 
 A fully-featured Flutter news application built with Firebase Auth, NewsAPI, GetX state management, and SQLite local storage.
@@ -27,7 +26,7 @@ A fully-featured Flutter news application built with Firebase Auth, NewsAPI, Get
 
 ### 1. Clone and install dependencies
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/RafiFdhln/news_application.git
 cd news_apps
 flutter pub get
 ```
@@ -118,13 +117,14 @@ news_apps/
 |---|---------|--------|
 | 1 | **Social Media Login** — Google Sign-In + Guest Login via Firebase Auth | ✅ |
 | 2 | **News Page** — Top headlines from NewsAPI, category filter, search, pull-to-refresh | ✅ |
-| 3 | **News Detail Page** — Full article view, bookmark, open URL in browser, Ask NewsBot FAB | ✅ |
-| 4 | **Chat Page** — NewsBot chatbot, text messages, image sending (gallery/camera), typing indicator | ✅ |
-| 5 | **SQLite Storage** — User data, cached articles, chat messages, bookmarks | ✅ |
-| 5 | **Offline Mode** — News & chat history accessible without internet | ✅ |
-| 6 | **Bookmark Feature** — Save/unsave articles, swipe-to-delete, badge count | ✅ |
-| 7 | **Profile Page** — User info, stats, sign out | ✅ |
-| 8 | **Automated Testing** — Unit + widget + integration tests | ✅ |
+| 3 | **News Detail Page** — Full article view, bookmark, copy URL, open in browser | ✅ |
+| 4 | **Ask NewsBot Button** — AppBar action icon | ✅ |
+| 5 | **Chat Page** — NewsBot chatbot, text messages, image sending (gallery/camera), typing indicator | ✅ |
+| 6 | **SQLite Storage** — User data, cached articles, chat messages, bookmarks | ✅ |
+| 7 | **Offline Mode** — News & chat history accessible without internet | ✅ |
+| 8 | **Bookmark Feature** — Save/unsave articles, swipe-to-delete, badge count | ✅ |
+| 9 | **Profile Page** — User info, stats, sign out | ✅ |
+| 10 | **Automated Testing** — Unit + widget + integration tests | ✅ |
 
 ---
 
@@ -142,14 +142,24 @@ flutter test integration_test/app_integration_test.dart
 
 ### Test coverage breakdown
 
-| Type | Files | Tests Covered |
-|------|-------|---------------|
-| **Unit** | `test/unit/auth_controller_test.dart` | Auth: Google login, guest login, sign out, cached user |
-| **Unit** | `test/unit/news_controller_test.dart` | News: fetch headlines, search, category selection, offline |
-| **Unit** | `test/unit/chat_controller_test.dart` | Chat: send message, bot reply, clear chat |
+| Type | File | Tests Covered |
+|------|------|---------------|
+| **Unit** | `test/unit/auth_controller_test.dart` | Google login, guest login, sign out, cached user |
+| **Unit** | `test/unit/news_controller_test.dart` | Fetch headlines, search, category selection, offline |
+| **Unit** | `test/unit/chat_controller_test.dart` | Send message, bot reply, clear chat |
 | **Widget** | `test/widget/login_page_test.dart` | Login page rendering, button interactions |
-| **Widget** | `test/widget/news_page_test.dart` | News page rendering, search interaction, offline banner |
-| **Integration** | `integration_test/app_integration_test.dart` | Full flow: login → browse news → tap article → open chat → send message |
+| **Widget** | `test/widget/news_page_test.dart` | News page rendering, search, offline banner |
+| **Integration** | `integration_test/app_integration_test.dart` | *(see below)* |
+
+### Integration test groups
+
+| Group | Tests |
+|-------|-------|
+| **Authentication** | Login page renders · Guest login navigates to News · Google sign-in failure stays on Login |
+| **News Page** | Article list displayed · Category filter · Search query · Pull-to-refresh · Bottom nav to Chat |
+| **News Detail Page** | Navigation to detail · Bookmark icon · **Ask NewsBot icon in AppBar (no overlap)** · Copy URL · Back navigation |
+| **Chat Page** | NewsBot header · Message stored in repository · Bot reply stored |
+| **End-to-End Journey** | Guest login → browse news → open article → verify UI fix → tap NewsBot AppBar icon → send message |
 
 ---
 
@@ -174,7 +184,3 @@ NewsAPI free-tier keys may take **several minutes to a few hours** to become act
 | `canLaunchUrl` returns false | Ensure `AndroidManifest.xml` has `<queries>` for `https` scheme |
 | Emulator camera not working | Use a physical device or configure emulator camera settings |
 | Firebase initialization error | Verify `google-services.json` package name matches `com.example.news_apps` |
-=======
-# news_application
-News Application is a mobile-based news app that allows users to browse the latest headlines and read full article details in a seamless interface.
->>>>>>> origin/main

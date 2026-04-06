@@ -86,22 +86,6 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _openChatBot,
-        backgroundColor: AppColors.accent,
-        foregroundColor: Colors.white,
-        elevation: 6,
-        icon: const Icon(Icons.smart_toy_rounded),
-        label: const Text(
-          'Ask NewsBot',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w600,
-            fontSize: 14,
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: CustomScrollView(
         slivers: [
           // Hero image app bar
@@ -168,6 +152,23 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                   ),
                   child: const Icon(
                     Icons.copy_rounded,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ),
+              ),
+              // Ask NewsBot button
+              IconButton(
+                onPressed: _openChatBot,
+                tooltip: 'Ask NewsBot',
+                icon: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.accent,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.smart_toy_rounded,
                     color: Colors.white,
                     size: 18,
                   ),
@@ -366,7 +367,7 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                         ),
                       ),
                     ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 32),
                 ],
               ),
             ),

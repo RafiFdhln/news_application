@@ -57,8 +57,6 @@ class FakeAuthRepository implements AuthRepositoryInterface {
   Future<void> signOut() async => _cachedUser = null;
 }
 
-// ─── FakeNewsRepository ────────────────────────────────────────────────────────
-
 class FakeNewsRepository implements NewsRepositoryInterface {
   List<ArticleModel> articles;
   bool offlineMode;
@@ -96,8 +94,6 @@ class FakeNewsRepository implements NewsRepositoryInterface {
   @override
   Future<List<ArticleModel>> getCachedArticles() async => articles;
 }
-
-// ─── FakeChatRepository ────────────────────────────────────────────────────────
 
 class FakeChatRepository implements ChatRepositoryInterface {
   final List<MessageModel> stored = [];
@@ -151,7 +147,9 @@ class FakeChatRepository implements ChatRepositoryInterface {
   @override
   String generateBotReply(String userMessage) {
     final lower = userMessage.toLowerCase();
-    if (lower.contains('hello') || lower.contains('hi') || lower.contains('hey')) {
+    if (lower.contains('hello') ||
+        lower.contains('hi') ||
+        lower.contains('hey')) {
       return 'Hello! 👋 I\'m NewsBot.';
     }
     if (lower.contains('news') || lower.contains('headline')) {
@@ -163,8 +161,6 @@ class FakeChatRepository implements ChatRepositoryInterface {
     return '📱 I\'m here to help you stay informed!';
   }
 }
-
-// ─── Sample data helpers ───────────────────────────────────────────────────────
 
 List<ArticleModel> sampleArticles() => [
       ArticleModel(
