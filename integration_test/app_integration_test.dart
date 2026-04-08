@@ -26,22 +26,10 @@ void main() {
     fakeNews = FakeNewsRepository(articles: sampleArticles());
     fakeChat = FakeChatRepository();
 
-    Get.put<AuthController>(
-      AuthController(authRepository: fakeAuth),
-      permanent: true,
-    );
-    Get.put<NewsController>(
-      NewsController(newsRepository: fakeNews),
-      permanent: true,
-    );
-    Get.put<ChatController>(
-      ChatController(chatRepository: fakeChat),
-      permanent: true,
-    );
-    Get.put<BookmarkController>(
-      FakeBookmarkController(),
-      permanent: true,
-    );
+    Get.put<AuthController>(AuthController(authRepository: fakeAuth), permanent: true);
+    Get.put<NewsController>(NewsController(newsRepository: fakeNews), permanent: true);
+    Get.put<ChatController>(ChatController(chatRepository: fakeChat), permanent: true);
+    Get.put<BookmarkController>(FakeBookmarkController(), permanent: true);
 
     await Future.delayed(const Duration(milliseconds: 150));
   });
