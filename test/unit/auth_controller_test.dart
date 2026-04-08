@@ -24,7 +24,7 @@ void main() {
     });
   });
 
-  group('AuthController — sign in with Google', () {
+  group('AuthController - sign in with Google', () {
     test('sets user and marks loggedIn on success', () async {
       fakeAuth.setGoogleUser(sampleGoogleUser());
       await authController.signInWithGoogle();
@@ -107,9 +107,8 @@ void main() {
       Get.reset();
       Get.testMode = true;
       final authFake = FakeAuthRepository(cachedUser: sampleGoogleUser());
-      final ctrl = AuthController(authRepository: authFake);
-      // Wait for async onInit to complete
-      await Future.delayed(const Duration(milliseconds: 100));
+      final ctrl = Get.put(AuthController(authRepository: authFake));
+      await Future.delayed(Duration.zero);
 
       expect(ctrl.currentUser.value?.uid, 'google-uid');
       Get.reset();

@@ -30,8 +30,7 @@ class AuthController extends GetxController {
       if (user != null) {
         currentUser.value = user;
       }
-    } catch (e) {
-      errorMessage.value = e.toString();
+    } catch (_) {
     } finally {
       isLoading.value = false;
     }
@@ -43,7 +42,7 @@ class AuthController extends GetxController {
     try {
       final user = await _authRepository.signInWithGoogle();
       currentUser.value = user;
-      Get.offAllNamed(AppRoutes.news);
+      _navigateSafely(AppRoutes.news);
     } catch (e) {
       errorMessage.value = _formatError(e.toString());
     } finally {
@@ -57,7 +56,7 @@ class AuthController extends GetxController {
     try {
       final user = await _authRepository.signInAsGuest();
       currentUser.value = user;
-      Get.offAllNamed(AppRoutes.news);
+      _navigateSafely(AppRoutes.news);
     } catch (e) {
       errorMessage.value = _formatError(e.toString());
     } finally {
@@ -75,6 +74,13 @@ class AuthController extends GetxController {
       errorMessage.value = _formatError(e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  void _navigateSafely(String route) {
+    try {
+      Get.offAllNamed(route);
+    } catch (_) {
     }
   }
 

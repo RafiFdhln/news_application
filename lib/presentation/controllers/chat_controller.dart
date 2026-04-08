@@ -8,12 +8,15 @@ import '../../data/repositories/chat_repository_interface.dart';
 class ChatController extends GetxController {
   final ChatRepositoryInterface _chatRepository;
   final ImagePicker _imagePicker;
+  final Duration _botReplyDelay;
 
   ChatController({
     required ChatRepositoryInterface chatRepository,
     ImagePicker? imagePicker,
+    Duration botReplyDelay = const Duration(milliseconds: 1200),
   })  : _chatRepository = chatRepository,
-        _imagePicker = imagePicker ?? ImagePicker();
+        _imagePicker = imagePicker ?? ImagePicker(),
+        _botReplyDelay = botReplyDelay;
 
   // Observables
   final RxList<MessageModel> messages = <MessageModel>[].obs;
@@ -25,7 +28,6 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Use current date as session ID for daily chat sessions
     sessionId.value =
         'session_${DateTime.now().toIso8601String().substring(0, 10)}';
     loadMessages();
@@ -36,8 +38,6 @@ class ChatController extends GetxController {
     try {
       final msgs = await _chatRepository.getMessages(sessionId.value);
       messages.value = msgs;
-
-      // Add welcome message if first time
       if (msgs.isEmpty) {
         await _addBotMessage(
           '👋 Hello! I\'m NewsBot, your personal news assistant!\n\nI can help you navigate the app and answer questions about the news. What would you like to know?',
@@ -54,19 +54,14 @@ class ChatController extends GetxController {
     if (text.trim().isEmpty) return;
 
     try {
-      // Add user message
       final userMsg = await _chatRepository.sendMessage(
         sessionId: sessionId.value,
         text: text.trim(),
         sender: MessageSender.user,
       );
       messages.add(userMsg);
-
-      // Show bot typing indicator
       isBotTyping.value = true;
       await Future.delayed(const Duration(milliseconds: 1200));
-
-      // Generate and add bot reply
       final reply = _chatRepository.generateBotReply(text.trim());
       await _addBotMessage(reply);
     } catch (e) {
@@ -112,8 +107,6 @@ class ChatController extends GetxController {
         sender: MessageSender.user,
       );
       messages.add(userMsg);
-
-      // Bot replies to image
       isBotTyping.value = true;
       await Future.delayed(const Duration(milliseconds: 1500));
       await _addBotMessage(
@@ -139,7 +132,7 @@ class ChatController extends GetxController {
   Future<void> clearChat() async {
     await _chatRepository.clearChat(sessionId.value);
     messages.clear();
-    await loadMessages(); // Re-adds welcome message
+    await loadMessages();
   }
 
   bool get hasMessages => messages.isNotEmpty;

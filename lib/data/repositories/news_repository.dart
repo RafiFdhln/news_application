@@ -22,7 +22,6 @@ class NewsRepository implements NewsRepositoryInterface {
     return results.any((r) => r != ConnectivityResult.none);
   }
 
-  /// Fetches top headlines. Returns cached data if offline or cache is valid.
   @override
   Future<List<ArticleModel>> getTopHeadlines({
     String country = 'us',

@@ -11,8 +11,11 @@ void main() {
   setUp(() async {
     Get.testMode = true;
     fakeChat = FakeChatRepository();
-    chatController = ChatController(chatRepository: fakeChat);
-    await Future.delayed(const Duration(milliseconds: 150));
+    chatController = Get.put(ChatController(
+      chatRepository: fakeChat,
+      botReplyDelay: Duration.zero,
+    ));
+    await Future.delayed(const Duration(milliseconds: 50));
   });
 
   tearDown(Get.reset);
@@ -37,7 +40,6 @@ void main() {
     });
 
     test('a welcome message is added on first session', () async {
-      // fakeChat starts empty, so welcome message should be sent
       expect(fakeChat.stored.any((m) => m.isBot), isTrue);
     });
   });
@@ -81,7 +83,6 @@ void main() {
     test('clears repository session messages', () async {
       await chatController.sendTextMessage('test 1');
       await chatController.clearChat();
-      // After clear, fakeChat.stored should only have the new welcome message
       expect(
         fakeChat.stored.every((m) => m.sessionId == chatController.sessionId.value),
         isTrue,

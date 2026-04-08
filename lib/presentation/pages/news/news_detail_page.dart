@@ -160,11 +160,10 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
               // Ask NewsBot button
               IconButton(
                 onPressed: _openChatBot,
-                tooltip: 'Ask NewsBot',
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.accent,
+                    color: AppColors.accent.withOpacity(0.85),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Icon(
@@ -339,7 +338,7 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                     const SizedBox(height: 28),
                   ],
 
-                    const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   // Read Full Article button
                   if (article.url.isNotEmpty)
@@ -367,7 +366,7 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                         ),
                       ),
                     ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
